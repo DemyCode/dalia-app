@@ -28,7 +28,7 @@ jobs:
       - name: Repository Alignment
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.PAT }}
-          repository: ${{ github.repository_owner }}/minecraft-copilot
+          token: ${{ steps.generate-token.outputs.token }}
+          repository: ${{ github.repository_owner }}/dalia
           event-type: alignment
           client-payload: '{"branch": "${{ github.ref_name }}", "repository": "${{ github.event.repository.name }}", "message": "${{ steps.commit-message.outputs.header }}"}'
