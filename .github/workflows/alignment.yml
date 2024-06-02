@@ -26,9 +26,15 @@ jobs:
           echo "Commit message header: $HEADER"
           echo "header=$HEADER" >> $GITHUB_OUTPUT
       - name: Repository Alignment
-        uses: peter-evans/repository-dispatch@v2
-        with:
-          token: ${{ steps.generate-token.outputs.token }}
-          repository: ${{ github.repository_owner }}/dalia
-          event-type: alignment
-          client-payload: '{"branch": "${{ github.ref_name }}", "repository": "${{ github.event.repository.name }}", "message": "${{ steps.commit-message.outputs.header }}"}'
+        run: |
+          gh api \
+          --method POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          /repos/DemyCode/dalia/dispatches \
+          -f "event_type=alignment" \
+          -F "client_payload[branch]=${{ github.ref_name }}" \
+          -F "client_payload[repository]=${{ github.event.repository.name }}" \
+          -F "client_payload[message]=${{ steps.commit-message.outputs.header }}"
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
