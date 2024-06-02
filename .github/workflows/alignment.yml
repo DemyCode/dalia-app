@@ -9,6 +9,7 @@ on:
 jobs:
   alignment:
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Create GitHub App Token
         uses: actions/create-github-app-token@v1.6.3
