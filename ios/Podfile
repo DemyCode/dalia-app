@@ -14,7 +14,7 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'dalia' do
+target 'dalia_front' do
   config = use_native_modules!
 
   use_react_native!(
@@ -23,7 +23,7 @@ target 'dalia' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'daliaTests' do
+  target 'dalia_frontTests' do
     inherit! :complete
     # Pods for testing
   end

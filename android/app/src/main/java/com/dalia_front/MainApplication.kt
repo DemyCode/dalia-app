@@ -1,4 +1,4 @@
-package com.dalia
+package com.dalia_front
 
 import android.app.Application
 import com.facebook.react.PackageList
